@@ -9,6 +9,10 @@
 - Job
 - Prompt (Caching)
 
+## ERD
+
+![erd](https://user-images.githubusercontent.com/47518272/231770817-44a843b9-087f-4aff-88e6-d25166e072f0.png)
+
 ## View
 
 ### Main
