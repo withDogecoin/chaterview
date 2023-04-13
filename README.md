@@ -4,7 +4,7 @@
 
 - Member
 - Quiz
-- UserQuizAnswer
+- MemberQuizAnswer
 - Subject
 - Job
 - Prompt (Caching)
