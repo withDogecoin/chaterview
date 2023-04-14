@@ -55,10 +55,10 @@ __Policy__
 - If pass the interviews then you can show "Congratulations on passing the job interview" otherwise "Thank you for participating in the interview"
 - The button provides Home and Mypage
 
-## Quiz Recommended algorithms
+## Quiz Recommended Algorithms
 
 Quiz recommendation is Random based by default. If you solve more than 100 questions, I recommend a question similar to the wrong one.
 
-## User Answer Processing Algorithm
+## User Answer Processing Algorithms
 
 The answer entered by the user and the prompt managed by the DB are combined and delivered to Chat AI. Since the prompt changes very little, it uses caching to reduce the I/O load.
