@@ -11,7 +11,7 @@
 
 ## ERD
 
-![erdiagram](https://user-images.githubusercontent.com/47518272/231771334-be1ede7f-9ed6-4ae2-afbb-8d6bdf2a6b4a.png)
+![erd](https://user-images.githubusercontent.com/47518272/231916659-8688061e-a47a-4ba5-9db6-28f8ffa4c697.png)
 
 ## View
 
