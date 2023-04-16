@@ -19,7 +19,7 @@ class Prompt(
     val id: Long? = null,
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "prompt_type", nullable = false)
     val type: PromptType? = null,
 
     @Column(nullable = false)
@@ -27,5 +27,5 @@ class Prompt(
 ): BaseEntity()
 
 enum class PromptType {
-    INVERVIEW_ANSWER
+    INTERVIEW_ANSWER
 }

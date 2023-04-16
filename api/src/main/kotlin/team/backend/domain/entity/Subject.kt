@@ -19,7 +19,7 @@ class Subject(
     val id: Long? = null,
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, insertable = false, updatable = false)
+    @Column(name = "subject_type", nullable = false, insertable = false, updatable = false)
     val type: SubjectType? = null
 ): BaseEntity()
 

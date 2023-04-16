@@ -21,14 +21,14 @@ class Quiz(
     @Column(name = "quiz_id")
     val id: Long? = null,
 
-    @Column(nullable = false, columnDefinition="TEXT")
+    @Column(name = "question", nullable = false, columnDefinition="TEXT")
     val question: String = "",
 
-    @Column(nullable = false)
+    @Column(name = "active", nullable = false)
     val active: Boolean = true,
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "quiz_level", nullable = false)
     val level: QuizLevel? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,5 +41,5 @@ class Quiz(
 ): BaseEntity()
 
 enum class QuizLevel {
-    EASY, NORMAL, HARD, EXPERT
+    BEGINNER, INTERMEDIATE, ADVANCED, EXPERT
 }

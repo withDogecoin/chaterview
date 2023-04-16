@@ -19,7 +19,7 @@ class Member(
     @Column(name = "member_id")
     val id: Long? = null,
 
-    @Column(nullable = false)
+    @Column(name = "member_name", nullable = false)
     val name: String = "",
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -19,7 +19,7 @@ class Job(
     val id: Long? = null,
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, insertable = false, updatable = false)
+    @Column(name = "job_type", nullable = false, insertable = false, updatable = false)
     val type: JobType? = null,
 ): BaseEntity()
 

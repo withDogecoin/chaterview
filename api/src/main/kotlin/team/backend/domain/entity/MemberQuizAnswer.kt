@@ -19,13 +19,13 @@ class MemberQuizAnswer(
     @Column(name = "member_quiz_answer_id")
     val id: Long? = null,
 
-    @Column(nullable = false)
+    @Column(name = "correct", nullable = false)
     val correct: Boolean = true,
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "answer", nullable = false, columnDefinition = "TEXT")
     val answer: String = "",
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "feedback", nullable = false, columnDefinition = "TEXT")
     val feedback: String = "",
 
     @ManyToOne(fetch = FetchType.LAZY)
