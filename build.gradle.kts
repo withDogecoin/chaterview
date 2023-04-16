@@ -91,8 +91,9 @@ project(":api") {
 //		runtimeOnly("mysql:mysql-connector-java")
 		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.4.RELEASE")
+		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive:2.0.4.RELEASE")
 		implementation("org.hibernate.reactive:hibernate-reactive-core:1.1.9.Final")
-//		implementation("io.smallrye.reactive:mutiny-kotlin:1.7.22")
+//		implementation("io.smallrye.reactive:mutiny-kotlin:1.6.0")
 
 		val jar: Jar by tasks
 		val bootJar: BootJar by tasks
