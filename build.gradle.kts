@@ -2,10 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-	id("org.springframework.boot") version "3.0.5" apply false
-	id("io.spring.dependency-management") version "1.1.0" apply false
+	id("org.springframework.boot") version "3.0.5"
+	id("io.spring.dependency-management") version "1.1.0"
 	kotlin("jvm") version "1.7.22"
-	kotlin("plugin.spring") version "1.7.22" apply false
+	kotlin("plugin.spring") version "1.7.22"
+	kotlin("plugin.jpa") version "1.7.22"
 }
 
 val kotestVersion = "5.5.5"
@@ -37,6 +38,13 @@ subprojects {
 	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 	apply(plugin = "org.springframework.boot")
 	apply(plugin = "io.spring.dependency-management")
+	apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
+
+	allOpen {
+		annotation("javax.persistence.Entity")
+		annotation("javax.persistence.MappedSuperclass")
+		annotation("javax.persistence.Embeddable")
+	}
 
 	dependencies {
 		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -78,6 +86,13 @@ project(":api") {
 		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 		testImplementation("io.projectreactor:reactor-test")
+
+		// database
+//		runtimeOnly("mysql:mysql-connector-java")
+		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.4.RELEASE")
+		implementation("org.hibernate.reactive:hibernate-reactive-core:1.1.9.Final")
+//		implementation("io.smallrye.reactive:mutiny-kotlin:1.7.22")
 
 		// r2dbc
 		// https://mvnrepository.com/artifact/org.springframework.data/spring-data-r2dbc
