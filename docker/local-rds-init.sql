@@ -4,7 +4,7 @@
 
 CREATE TABLE IF NOT EXISTS chaterview.tbl_prompt(
     prompt_id    INT(11)  unsigned auto_increment COMMENT '일련번호',
-    prompt_Type  ENUM('INTERVIEW_ANSWER') NOT NULL COMMENT '타입',
+    prompt_type  VARCHAR(20) NOT NULL COMMENT '타입',
     command VARCHAR(2000) NOT NULL COMMENT '명령어',
     created_at  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '등록일시',
     created_by  VARCHAR(100) NOT NULL DEFAULT 'SYSTEM' COMMENT '등록자',
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS chaterview.tbl_prompt(
 
 CREATE TABLE IF NOT EXISTS chaterview.tbl_job(
     job_id    INT(11)  unsigned auto_increment COMMENT '일련번호',
-    job_type  ENUM('BACKEND_ENGINEER', 'FRONTEND_ENGINEER', 'CLOUD_ENGINEER') NOT NULL COMMENT '타입',
+    job_type  VARCHAR(20) NOT NULL COMMENT '타입',
     created_at  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '등록일시',
     created_by  VARCHAR(100) NOT NULL DEFAULT 'SYSTEM' COMMENT '등록자',
     last_modified_at  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '수정일시',
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS chaterview.tbl_job(
 
 CREATE TABLE IF NOT EXISTS chaterview.tbl_subject(
     subject_id    INT(11)  unsigned auto_increment COMMENT '일련번호',
-    subject_type  ENUM('SPRING', 'JAVA', 'NETWORK', 'OS') NOT NULL COMMENT '타입',
+    subject_type  VARCHAR(20) NOT NULL COMMENT '타입',
     created_at  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '등록일시',
     created_by  VARCHAR(100) NOT NULL DEFAULT 'SYSTEM' COMMENT '등록자',
     last_modified_at  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '수정일시',
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS chaterview.tbl_member(
 CREATE TABLE IF NOT EXISTS chaterview.tbl_quiz(
     quiz_id    INT(11)  unsigned auto_increment COMMENT '일련번호',
     question    TEXT NOT NULL COMMENT '질문',
-    quiz_level ENUM('BEGINNER', 'INTERMEDIATE', 'ADVANCED', 'EXPERT') NOT NULL COMMENT '퀴즈 레벨',
+    quiz_level VARCHAR(20) NOT NULL COMMENT '퀴즈 레벨',
     active     TINYINT(1) NOT NULL COMMENT '활성화 여부',
     job_id      INT(11) NOT NULL COMMENT '직업 일련변호',
     subject_id  INT(11) NOT NULL COMMENT '주제 일련변호',
