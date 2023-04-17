@@ -61,14 +61,6 @@ subprojects {
 }
 
 project(":core") {
-	dependencies {
-		// r2dbc
-		// https://mvnrepository.com/artifact/org.springframework.data/spring-data-r2dbc
-		// TODO please uncomment after setting up r2dbc properties
-		// implementation("org.springframework.data:spring-data-r2dbc:3.0.4")
-		// implementation("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
-	}
-
 	val jar: Jar by tasks
 	val bootJar: BootJar by tasks
 
@@ -88,17 +80,12 @@ project(":api") {
 		testImplementation("io.projectreactor:reactor-test")
 
 		// database
-//		runtimeOnly("mysql:mysql-connector-java")
+		// Kotlin JDSL: https://github.com/line/kotlin-jdsl
+		runtimeOnly("mysql:mysql-connector-java")
 		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.4.RELEASE")
+		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive:2.0.4.RELEASE")
 		implementation("org.hibernate.reactive:hibernate-reactive-core:1.1.9.Final")
-//		implementation("io.smallrye.reactive:mutiny-kotlin:1.7.22")
-
-		// r2dbc
-		// https://mvnrepository.com/artifact/org.springframework.data/spring-data-r2dbc
-		// TODO please uncomment after setting up r2dbc properties
-		// implementation("org.springframework.data:spring-data-r2dbc:3.0.4")
-		// implementation("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
 
 		val jar: Jar by tasks
 		val bootJar: BootJar by tasks
