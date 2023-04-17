@@ -80,6 +80,7 @@ project(":api") {
 		testImplementation("io.projectreactor:reactor-test")
 
 		// database
+		// Kotlin JDSL: https://github.com/line/kotlin-jdsl
 		runtimeOnly("mysql:mysql-connector-java")
 		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.4.RELEASE")
