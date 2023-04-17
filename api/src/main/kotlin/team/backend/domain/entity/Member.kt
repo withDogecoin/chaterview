@@ -20,9 +20,9 @@ class Member(
     val id: Long? = null,
 
     @Column(name = "member_name", nullable = false)
-    val name: String = "",
+    val name: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", nullable = false)
-    val job: Job? = null,
+    val job: Job,
 ): BaseEntity()

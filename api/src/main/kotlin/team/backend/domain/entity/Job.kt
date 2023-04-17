@@ -20,7 +20,7 @@ class Job(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "job_type", nullable = false, insertable = false, updatable = false)
-    val type: JobType? = null,
+    val type: JobType,
 ): BaseEntity()
 
 enum class JobType {

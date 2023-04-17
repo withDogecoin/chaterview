@@ -20,7 +20,7 @@ class Subject(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "subject_type", nullable = false, insertable = false, updatable = false)
-    val type: SubjectType? = null
+    val type: SubjectType
 ): BaseEntity()
 
 enum class SubjectType {

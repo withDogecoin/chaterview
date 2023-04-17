@@ -29,15 +29,15 @@ class Quiz(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "quiz_level", nullable = false)
-    val level: QuizLevel? = null,
+    val level: QuizLevel,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_id", nullable = false)
-    val job: Job? = null,
+    val job: Job,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", nullable = false)
-    val subject: Subject? = null,
+    val subject: Subject,
 ): BaseEntity()
 
 enum class QuizLevel {

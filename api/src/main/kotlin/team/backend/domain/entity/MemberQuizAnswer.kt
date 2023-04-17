@@ -23,16 +23,16 @@ class MemberQuizAnswer(
     val correct: Boolean = true,
 
     @Column(name = "answer", nullable = false, columnDefinition = "TEXT")
-    val answer: String = "",
+    val answer: String,
 
     @Column(name = "feedback", nullable = false, columnDefinition = "TEXT")
-    val feedback: String = "",
+    val feedback: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
-    val member: Member? = null,
+    val member: Member,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id", nullable = false)
-    val quiz: Quiz? = null,
+    val quiz: Quiz,
 ): BaseEntity()

@@ -20,10 +20,10 @@ class Prompt(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "prompt_type", nullable = false)
-    val type: PromptType? = null,
+    val type: PromptType,
 
     @Column(nullable = false)
-    val command: String? = ""
+    val command: String,
 ): BaseEntity()
 
 enum class PromptType {
