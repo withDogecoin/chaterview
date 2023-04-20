@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.comparables.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
 
-class Compression: StringSpec({
+internal class CompressionTest: StringSpec({
 
     val massiveText = "HelloHelloHelloHelloDlkanfioadfnakldn  ZLIB  kasdnfoijdfknzcvz!@#!#!sdafnaiadkfnaksdf" +
         "oijdfknzccxklvnz!%^&%^&^%&%^&SD  BAEK  Fvdfgahiohenraoifnzmvz,vzcvvz!@#!#!sd" +
@@ -12,8 +12,8 @@ class Compression: StringSpec({
         "sadfasfafnfnfnfnfndskncknverihqwnmzcnv"
 
     "Compression and DeCompression using ZLIB" {
-        val compressedData = massiveText.zlibCompress()
-        val deCompressedData = compressedData.zlibDecompress()
+        val compressedData = massiveText.compress()
+        val deCompressedData = compressedData.decompress()
 
         val originalSize = massiveText.toByteArray(charset("UTF-8")).size
         val compressedDataSize = compressedData.size

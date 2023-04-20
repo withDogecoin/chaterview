@@ -9,7 +9,7 @@ import java.util.zip.Inflater
  *
  * @return an UTF-8 encoded byte array.
  */
-fun String.zlibCompress(): ByteArray {
+fun String.compress(): ByteArray {
     val input = this.toByteArray(charset("UTF-8"))
 
     // Compress the bytes
@@ -28,7 +28,7 @@ fun String.zlibCompress(): ByteArray {
  *
  * @return an UTF-8 encoded string.
  */
-fun ByteArray.zlibDecompress(): String {
+fun ByteArray.decompress(): String {
     val inflater = Inflater()
     val outputStream = ByteArrayOutputStream()
 
