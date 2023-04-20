@@ -19,9 +19,10 @@ class Compression: StringSpec({
         val compressedDataSize = compressedData.size
         val deCompressedDataSize = deCompressedData.toByteArray(charset("UTF-8")).size
 
-        println("original size: $originalSize")
-        println("compressedData size: $compressedDataSize")
-        println("deCompressedData size: $deCompressedDataSize")
+        println("Original size: $originalSize")
+        println("Compressed size: $compressedDataSize")
+        println("DeCompressed size: $deCompressedDataSize")
+        println("DeCompressed Results: $deCompressedData")
 
         originalSize shouldBeGreaterThan compressedDataSize
         originalSize shouldBe deCompressedDataSize
