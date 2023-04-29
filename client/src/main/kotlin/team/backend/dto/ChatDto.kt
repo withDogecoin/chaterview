@@ -1,25 +1,22 @@
 package team.backend.dto
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import team.backend.model.ChatModel
+import team.backend.model.ChatRole
 
 class ChatDto {
-
-    companion object {
-        private const val chatModel = "gpt-3.5-turbo"
-        private const val chatRole = "user"
-    }
 
     data class Request(
         val model: String,
         val messages: List<Message>
     ) {
         companion object {
-            fun from(content: String): Request {
+            fun of(model: ChatModel, role: ChatRole, content: String): Request {
                 return Request(
-                    model = chatModel,
+                    model = model.key,
                     messages = listOf(
                         Message(
-                            role = chatRole,
+                            role = role.key,
                             content = content
                         )
                     )
