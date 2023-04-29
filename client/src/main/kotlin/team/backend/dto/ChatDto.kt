@@ -1,6 +1,8 @@
 package team.backend.dto
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.databind.PropertyNamingStrategies
+import com.fasterxml.jackson.databind.annotation.JsonNaming
 import team.backend.model.ChatModel
 import team.backend.model.ChatRole
 
@@ -40,15 +42,17 @@ class ChatDto {
         val name: String? = null
     )
 
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
     data class Choice(
         val index: Int,
         val message: Message,
-        val finish_reason: String
+        val finishReason: String
     )
 
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
     data class Usage(
-        val prompt_tokens: Int,
-        val completion_tokens: Int,
-        val total_tokens: Int
+        val promptTokens: Int,
+        val completionTokens: Int,
+        val totalTokens: Int
     )
 }
