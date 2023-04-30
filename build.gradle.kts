@@ -93,6 +93,17 @@ project(":api") {
 		bootJar.enabled = true
 		jar.enabled = false
 	}
+
+	tasks.register<Copy>("copySecretYml") {
+		from("../chaterview-private") {
+			include("*.yml")
+		}
+		into("./src/main/resources")
+	}
+
+	tasks.named("compileJava") {
+		dependsOn("copySecretYml")
+	}
 }
 
 project(":client") {
