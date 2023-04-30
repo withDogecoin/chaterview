@@ -1,0 +1,4 @@
+[submodule "chaterview-private"]
+	path = chaterview-private
+	url = git@github.com:withDogecoin/chaterview-private.git
+	branch = main
