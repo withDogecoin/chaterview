@@ -73,16 +73,17 @@ project(":api") {
 		implementation(project(":core"))
 		implementation(project(":client"))
 
-		// webflux
+		// Webflux
 		implementation("org.springframework.boot:spring-boot-starter-webflux")
 		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 		testImplementation("io.projectreactor:reactor-test")
 
-		// database
-		// Kotlin JDSL: https://github.com/line/kotlin-jdsl
-		runtimeOnly("mysql:mysql-connector-java")
+		// Database
 		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+		// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+		runtimeOnly("mysql:mysql-connector-java:8.0.32")
+		// Kotlin JDSL: https://github.com/line/kotlin-jdsl
 		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.4.RELEASE")
 		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive:2.0.4.RELEASE")
 		implementation("org.hibernate.reactive:hibernate-reactive-core:1.1.9.Final")
