@@ -50,6 +50,9 @@ subprojects {
 		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+		// https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos/4.1.92.Final
+		implementation("io.netty:netty-resolver-dns-native-macos:4.1.92.Final:osx-aarch_64")
+
 		// kotest
 		// https://kotest.io/docs/quickstart
 		testImplementation("io.kotest:kotest-runner-junit5:${kotestVersion}")
@@ -97,6 +100,7 @@ project(":api") {
 
 project(":client") {
 	dependencies {
+		implementation("org.springframework.boot:spring-boot-starter-webflux")
 	}
 
 	val jar: Jar by tasks
