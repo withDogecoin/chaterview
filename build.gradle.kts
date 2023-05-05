@@ -33,6 +33,39 @@ allprojects {
 	}
 }
 
+fun DependencyHandlerScope.addDatabaseDependencies() {
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	runtimeOnly("mysql:mysql-connector-java:8.0.32")
+
+	/**
+	 * Kotlin JDSL with SpringBoot 2.x version
+	 *   - https://github.com/line/kotlin-jdsl
+	 *   - implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.4.RELEASE")
+	 *   - implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive:2.0.4.RELEASE")
+	 */
+
+	/**
+	 * Kotlin JDSL with Spring Boot 3.x version
+	 *   - https://github.com/line/kotlin-jdsl/blob/main/spring/data-reactive-core/README.md
+	 */
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive-jakarta:2.2.1.RELEASE")
+//	implementation("org.springframework.data:spring-data-commons:x.y.z")
+	implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
+	implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
+
+	/**
+	 * Low level Dependencies with Spring Boot 3.x version
+	 *   - LINE Lib versions - https://github.com/line/kotlin-jdsl/blob/main/libs.versions.toml
+	 *   - implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
+	 *   - implementation("org.hibernate.reactive:hibernate-reactive-core:1.1.9.Final")
+	 *   - implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+	 *   - implementation("org.hibernate:hibernate-core:6.2.2.Final")
+	 *   - implementation("io.smallrye.reactive:mutiny:2.2.0")
+	 *   - implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
+	 */
+}
+
 subprojects {
 	apply(plugin = "org.jetbrains.kotlin.jvm")
 	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
@@ -47,11 +80,15 @@ subprojects {
 	}
 
 	dependencies {
+		implementation("org.springframework.boot:spring-boot-starter-webflux")
 		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("org.springframework.boot:spring-boot-configuration-processor")
 
 		// https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos/4.1.92.Final
 		implementation("io.netty:netty-resolver-dns-native-macos:4.1.92.Final:osx-aarch_64")
+
+		addDatabaseDependencies()
 
 		// kotest
 		// https://kotest.io/docs/quickstart
@@ -76,20 +113,10 @@ project(":api") {
 		implementation(project(":core"))
 		implementation(project(":client"))
 
-		// Webflux
-		implementation("org.springframework.boot:spring-boot-starter-webflux")
 		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 		testImplementation("io.projectreactor:reactor-test")
 
-		// Database
-		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-		// https://mvnrepository.com/artifact/mysql/mysql-connector-java
-		runtimeOnly("mysql:mysql-connector-java:8.0.32")
-		// Kotlin JDSL: https://github.com/line/kotlin-jdsl
-		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.4.RELEASE")
-		implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive:2.0.4.RELEASE")
-		implementation("org.hibernate.reactive:hibernate-reactive-core:1.1.9.Final")
 
 		val jar: Jar by tasks
 		val bootJar: BootJar by tasks
