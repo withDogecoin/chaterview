@@ -48,10 +48,14 @@ fun DependencyHandlerScope.addDatabaseDependencies() {
 	 * Kotlin JDSL with Spring Boot 3.x version
 	 *   - https://github.com/line/kotlin-jdsl/blob/main/spring/data-reactive-core/README.md
 	 */
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa") {
+		exclude(group = "org.hibernate", module = "hibernate-core")
+	}
 	implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive-jakarta:2.2.1.RELEASE")
 //	implementation("org.springframework.data:spring-data-commons:x.y.z")
-	implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
+	implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final") {
+		exclude(module = "hibernate-commons-annotations")
+	}
 	implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
 
 	/**
@@ -59,8 +63,8 @@ fun DependencyHandlerScope.addDatabaseDependencies() {
 	 *   - LINE Lib versions - https://github.com/line/kotlin-jdsl/blob/main/libs.versions.toml
 	 *   - implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
 	 *   - implementation("org.hibernate.reactive:hibernate-reactive-core:1.1.9.Final")
-	 *   - implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
-	 *   - implementation("org.hibernate:hibernate-core:6.2.2.Final")
+	 *   - compileOnly("jakarta.persistence:jakarta.persistence-api:3.1.0")
+	 *   - compileOnly("org.hibernate:hibernate-core:6.2.2.Final")
 	 *   - implementation("io.smallrye.reactive:mutiny:2.2.0")
 	 *   - implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
 	 */
