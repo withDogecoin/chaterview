@@ -36,38 +36,23 @@ allprojects {
 fun DependencyHandlerScope.addDatabaseDependencies() {
 	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
 	runtimeOnly("mysql:mysql-connector-java:8.0.32")
-
-	/**
-	 * Kotlin JDSL with SpringBoot 2.x version
-	 *   - https://github.com/line/kotlin-jdsl
-	 *   - implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-starter:2.0.4.RELEASE")
-	 *   - implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive:2.0.4.RELEASE")
-	 */
-
-	/**
-	 * Kotlin JDSL with Spring Boot 3.x version
-	 *   - https://github.com/line/kotlin-jdsl/blob/main/spring/data-reactive-core/README.md
+	/*
+		LINE Lib versions - https://github.com/line/kotlin-jdsl/blob/main/libs.versions.toml
+		Kotlin JDSL with Spring Boot 3.x version
+	 	    https://github.com/line/kotlin-jdsl/blob/main/spring/data-reactive-core/README.md
+	 	Kotlin JDSL Examples
+	 	    https://github.com/cj848/kotlin-jdsl-example
 	 */
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa") {
-		exclude(group = "org.hibernate", module = "hibernate-core")
-	}
-	implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive-jakarta:2.2.1.RELEASE")
-//	implementation("org.springframework.data:spring-data-commons:x.y.z")
-	implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final") {
+		exclude(module = "hibernate-core")
 		exclude(module = "hibernate-commons-annotations")
 	}
-	implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
-
-	/**
-	 * Low level Dependencies with Spring Boot 3.x version
-	 *   - LINE Lib versions - https://github.com/line/kotlin-jdsl/blob/main/libs.versions.toml
-	 *   - implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
-	 *   - implementation("org.hibernate.reactive:hibernate-reactive-core:1.1.9.Final")
-	 *   - compileOnly("jakarta.persistence:jakarta.persistence-api:3.1.0")
-	 *   - compileOnly("org.hibernate:hibernate-core:6.2.2.Final")
-	 *   - implementation("io.smallrye.reactive:mutiny:2.2.0")
-	 *   - implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
-	 */
+	implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive-jakarta:2.2.1.RELEASE")
+	implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
+	implementation("io.vertx:vertx-jdbc-client:4.3.1")
+	implementation("io.agroal:agroal-pool:2.0")
+	implementation("io.smallrye.reactive:mutiny-kotlin:1.6.0")
+	compileOnly("jakarta.persistence:jakarta.persistence-api:3.1.0")
 }
 
 subprojects {
@@ -78,15 +63,17 @@ subprojects {
 	apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
 
 	allOpen {
-		annotation("javax.persistence.Entity")
-		annotation("javax.persistence.MappedSuperclass")
-		annotation("javax.persistence.Embeddable")
+		annotation("jakarta.persistence.Entity")
+		annotation("jakarta.persistence.MappedSuperclass")
+		annotation("jakarta.persistence.Embeddable")
 	}
 
 	dependencies {
 		implementation("org.springframework.boot:spring-boot-starter-webflux")
 		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
+		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 		implementation("org.springframework.boot:spring-boot-configuration-processor")
 
 		// https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos/4.1.92.Final
@@ -117,8 +104,6 @@ project(":api") {
 		implementation(project(":core"))
 		implementation(project(":client"))
 
-		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 		testImplementation("io.projectreactor:reactor-test")
 
 
