@@ -49,9 +49,9 @@ fun DependencyHandlerScope.addDatabaseDependencies() {
 	}
 	implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive-jakarta:2.2.1.RELEASE")
 	implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
-	implementation("io.vertx:vertx-jdbc-client:4.3.1")
+	implementation("io.vertx:vertx-jdbc-client:4.4.1")
 	implementation("io.agroal:agroal-pool:2.0")
-	implementation("io.smallrye.reactive:mutiny-kotlin:1.6.0")
+	implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
 	compileOnly("jakarta.persistence:jakarta.persistence-api:3.1.0")
 }
 
