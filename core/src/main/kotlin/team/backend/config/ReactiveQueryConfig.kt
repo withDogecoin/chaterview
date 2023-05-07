@@ -102,7 +102,7 @@ class ReactiveQueryConfig {
             setProperty("jakarta.persistence.jdbc.user", "doge")
             setProperty("jakarta.persistence.jdbc.password", "1234")
             setProperty("hibernate.use_sql_comments", "true")
-            setProperty("hibernate.show_sql", "use_sql_comments")
+            setProperty("hibernate.show_sql", "true")
             setProperty("hibernate.use_sql_comments", "true")
             setProperty("hibernate.query.in_clause_parameter_padding", "true")
             setProperty("hibernate.query.default_batch_fetch_size", "1000")

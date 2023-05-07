@@ -1,5 +1,6 @@
 package team.backend.domain.service
 
+import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 import team.backend.domain.entity.Job
 import team.backend.domain.entity.JobType
@@ -16,6 +17,7 @@ class QuizService(
         val job = Job(type = JobType.BACKEND_ENGINEER)
         jobRepository.save(job)
     }
+
 
     suspend fun findJob() {
         val result = jobRepository.findById(1L)
