@@ -11,14 +11,14 @@ import java.net.URI
 
 class MysqlConnectionPool: DefaultSqlClientPool() {
 
-    override fun createPool(uri: URI?, connectOptions: SqlConnectOptions?, poolOptions: PoolOptions?, vertx: Vertx?): Pool {
+    override fun createPool(uri: URI, connectOptions: SqlConnectOptions, poolOptions: PoolOptions, vertx: Vertx): Pool {
         return MySQLPool.pool(
             vertx,
             MySQLConnectOptions()
-                .setHost(connectOptions?.host)
-                .setUser(connectOptions?.user)
-                .setPassword(connectOptions?.password)
-                .setDatabase(connectOptions?.database),
+                .setHost(connectOptions.host)
+                .setUser(connectOptions.user)
+                .setPassword(connectOptions.password)
+                .setDatabase(connectOptions.database),
             poolOptions
         )
     }
