@@ -34,8 +34,9 @@ allprojects {
 }
 
 fun DependencyHandlerScope.addDatabaseDependencies() {
-	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
-	runtimeOnly("mysql:mysql-connector-java:8.0.32")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa") {
+		exclude("org.hibernate.orm", "hibernate-core")
+	}
 	/*
 		LINE Lib versions - https://github.com/line/kotlin-jdsl/blob/main/libs.versions.toml
 		Kotlin JDSL with Spring Boot 3.x version
@@ -43,16 +44,13 @@ fun DependencyHandlerScope.addDatabaseDependencies() {
 	 	Kotlin JDSL Examples
 	 	    https://github.com/cj848/kotlin-jdsl-example
 	 */
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa") {
-		exclude(module = "hibernate-core")
-		exclude(module = "hibernate-commons-annotations")
-	}
-	implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive-jakarta:2.2.1.RELEASE")
 	implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
-	implementation("io.vertx:vertx-jdbc-client:4.4.1")
-	implementation("io.agroal:agroal-pool:2.0")
+	implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive-jakarta:2.2.1.RELEASE")
+
+	implementation("io.vertx:vertx-mysql-client:4.4.1")
+	implementation("mysql:mysql-connector-java:8.0.33")
+
 	implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
-	compileOnly("jakarta.persistence:jakarta.persistence-api:3.1.0")
 }
 
 subprojects {
