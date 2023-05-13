@@ -2,20 +2,18 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-	id("org.springframework.boot") version "3.0.5"
-	id("io.spring.dependency-management") version "1.1.0"
-	kotlin("jvm") version "1.7.22"
-	kotlin("plugin.spring") version "1.7.22"
-	kotlin("plugin.jpa") version "1.7.22"
+	id(Plugins.SPRING_BOOT) version Versions.SPRING_BOOT
+	id(Plugins.SPRING_DEPENDENCY_MANAGEMENT) version Versions.SPRING_DEPENDENCY_MANAGEMENT
+	kotlin(Plugins.JVM) version Versions.KOTLIN
+	kotlin(Plugins.SPRING) version Versions.KOTLIN
+	kotlin(Plugins.JPA) version Versions.KOTLIN
 }
-
-val kotestVersion = "5.5.5"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 allprojects {
-	group = "team.backend"
-	version = "0.0.1-SNAPSHOT"
+	group = Projects.GROUP
+	version = Projects.VERSIONS
 
 	repositories {
 		mavenCentral()
@@ -23,8 +21,8 @@ allprojects {
 
 	tasks.withType<KotlinCompile> {
 		kotlinOptions {
-			freeCompilerArgs = listOf("-Xjsr305=strict")
-			jvmTarget = "17"
+			freeCompilerArgs = listOf(CompilerOptions.NULL_SAFETY)
+			jvmTarget = Versions.JVM
 		}
 	}
 
@@ -33,63 +31,39 @@ allprojects {
 	}
 }
 
-fun DependencyHandlerScope.addDatabaseDependencies() {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa") {
-		exclude("org.hibernate.orm", "hibernate-core")
-	}
-	/*
-		LINE Lib versions - https://github.com/line/kotlin-jdsl/blob/main/libs.versions.toml
-		Kotlin JDSL with Spring Boot 3.x version
-	 	    https://github.com/line/kotlin-jdsl/blob/main/spring/data-reactive-core/README.md
-	 	Kotlin JDSL Examples
-	 	    https://github.com/cj848/kotlin-jdsl-example
-	 */
-	implementation("org.hibernate.reactive:hibernate-reactive-core-jakarta:1.1.9.Final")
-	implementation("com.linecorp.kotlin-jdsl:spring-data-kotlin-jdsl-hibernate-reactive-jakarta:2.2.1.RELEASE")
-
-	implementation("io.vertx:vertx-mysql-client:4.4.1")
-	implementation("mysql:mysql-connector-java:8.0.33")
-
-	implementation("io.smallrye.reactive:mutiny-kotlin:2.2.0")
-}
-
 subprojects {
-	apply(plugin = "org.jetbrains.kotlin.jvm")
-	apply(plugin = "org.jetbrains.kotlin.plugin.spring")
-	apply(plugin = "org.springframework.boot")
-	apply(plugin = "io.spring.dependency-management")
-	apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
+	apply(plugin = Plugins.SPRING_BOOT)
+	apply(plugin = Plugins.SPRING_DEPENDENCY_MANAGEMENT)
+	apply(plugin = Plugins.JETBRAINS_KOTLIN_JVM)
+	apply(plugin = Plugins.JETBRAINS_KOTLIN_SPRING)
+	apply(plugin = Plugins.JETBRAINS_KOTLIN_JPA)
 
 	allOpen {
-		annotation("jakarta.persistence.Entity")
-		annotation("jakarta.persistence.MappedSuperclass")
-		annotation("jakarta.persistence.Embeddable")
+		annotation(Annotations.ENTITY)
+		annotation(Annotations.MAPPED_SUPER_CLASS)
+		annotation(Annotations.EMBEDDEDABLE)
 	}
 
 	dependencies {
-		implementation("org.springframework.boot:spring-boot-starter-webflux")
-		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-		implementation("org.jetbrains.kotlin:kotlin-reflect")
-		implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-		implementation("org.springframework.boot:spring-boot-configuration-processor")
+		implementation(Spring.WEBFLUX)
+		implementation(Spring.CONFIGURATION_PROCESSOR)
+		implementation(Kotlin.JACKSON)
+		implementation(Kotlin.REFLECT)
+		implementation(Kotlin.EXTENSIONS)
+		implementation(Kotlin.COROUTINE_REACTOR)
 
-		// https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos/4.1.92.Final
-		implementation("io.netty:netty-resolver-dns-native-macos:4.1.92.Final:osx-aarch_64")
+		implementation(Netty.DNS_RESOLVER_MACOS)
 
 		addDatabaseDependencies()
 
-		// kotest
-		// https://kotest.io/docs/quickstart
-		testImplementation("io.kotest:kotest-runner-junit5:${kotestVersion}")
-		testImplementation("io.kotest:kotest-assertions-core:${kotestVersion}")
-		testImplementation("io.kotest:kotest-property:${kotestVersion}")
-
-		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		testImplementation(Kotest.RUNNER_JUNIT)
+		testImplementation(Kotest.ASSERTIONS_CORE)
+		testImplementation(Kotest.PROPERTY)
+		testImplementation(Spring.TEST)
 	}
 }
 
-project(":core") {
+project(Modules.CORE) {
 	val jar: Jar by tasks
 	val bootJar: BootJar by tasks
 
@@ -97,13 +71,12 @@ project(":core") {
 	jar.enabled = true
 }
 
-project(":api") {
+project(Modules.API) {
 	dependencies {
-		implementation(project(":core"))
-		implementation(project(":client"))
+		implementation(project(Modules.CORE))
+		implementation(project(Modules.CLIENT))
 
-		testImplementation("io.projectreactor:reactor-test")
-
+		testImplementation(ProjectReactor.TEST)
 
 		val jar: Jar by tasks
 		val bootJar: BootJar by tasks
@@ -113,10 +86,10 @@ project(":api") {
 	}
 
 	tasks.register<Copy>("copySecretYml") {
-		from("../chaterview-private") {
+		from(Resources.SOURCE_PATH) {
 			include("*.yml")
 		}
-		into("./src/main/resources")
+		into(Resources.DESTINATION_PATH)
 	}
 
 	tasks.named("compileJava") {
@@ -124,9 +97,9 @@ project(":api") {
 	}
 }
 
-project(":client") {
+project(Modules.CLIENT) {
 	dependencies {
-		implementation("org.springframework.boot:spring-boot-starter-webflux")
+		implementation(Spring.WEBFLUX)
 	}
 
 	val jar: Jar by tasks
@@ -134,4 +107,15 @@ project(":client") {
 
 	bootJar.enabled = false
 	jar.enabled = true
+}
+
+fun DependencyHandlerScope.addDatabaseDependencies() {
+	implementation(Spring.JPA) {
+		exclude(Hibernate.ORM, Hibernate.CORE)
+	}
+	implementation(Hibernate.REACTIVE_CORE_JAKARTA)
+	implementation(Line.SPRING_DATA_KOTLIN_JDSL_HIBERNATE_REACTIVE_JAKARTA)
+	implementation(Vertx.MYSQL_CLIENT)
+	implementation(Database.MYSQL)
+	implementation(Mutiny.Kotlin)
 }
