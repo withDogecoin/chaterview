@@ -1,4 +1,4 @@
-package team.backend.common.response
+package team.backend.response
 
 class CommonResponse<T> private constructor(
     val code: String,

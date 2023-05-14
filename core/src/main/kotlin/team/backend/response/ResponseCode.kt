@@ -1,4 +1,4 @@
-package team.backend.common.response
+package team.backend.response
 
 import org.springframework.http.HttpStatus
 
