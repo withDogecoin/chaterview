@@ -47,6 +47,7 @@ subprojects {
 	dependencies {
 		implementation(Spring.WEBFLUX)
 		implementation(Spring.CONFIGURATION_PROCESSOR)
+		implementation(Spring.VALIDATION)
 		implementation(Kotlin.JACKSON)
 		implementation(Kotlin.REFLECT)
 		implementation(Kotlin.EXTENSIONS)
