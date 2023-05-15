@@ -16,8 +16,8 @@ class CommonExceptionHandler {
         return Mono.just(ResponseEntity(CommonResponse.fail(errorCode), errorCode.httpStatus))
     }
 
-    @ExceptionHandler(CommonException::class)
-    fun commonException(e: CommonException): Mono<ResponseEntity<CommonResponse<Unit>>> {
+    @ExceptionHandler(BaseException::class)
+    fun baseException(e: BaseException): Mono<ResponseEntity<CommonResponse<Unit>>> {
         val errorCode = e.errorCode
         return Mono.just(ResponseEntity(CommonResponse.fail(errorCode), errorCode.httpStatus))
     }

@@ -2,4 +2,4 @@ package team.backend.exception
 
 import team.backend.response.ResponseCode
 
-class InvalidDomainException: CommonException(ResponseCode.INVALID_DOMAIN)
+class InvalidDomainException: BaseException(ResponseCode.INVALID_DOMAIN)
