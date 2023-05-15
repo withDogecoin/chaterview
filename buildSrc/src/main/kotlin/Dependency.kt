@@ -57,3 +57,11 @@ object Mutiny {
 object ProjectReactor {
     const val TEST = "io.projectreactor:reactor-test"
 }
+
+object Documentation {
+    const val SPRING_RESTDOCS_WEBCLIENT = "org.springframework.restdocs:spring-restdocs-webtestclient"
+    const val EPAGES_RESTDOCS_API_SPEC = "com.epages:restdocs-api-spec:${Versions.EPAGES}"
+    const val EPAGES_RESTDOCS_API_SPEC_WEBCLIENT = "com.epages:restdocs-api-spec-webtestclient:${Versions.EPAGES}"
+}
+
+const val JUNIT = "junit"

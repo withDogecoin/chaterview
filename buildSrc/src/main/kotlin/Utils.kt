@@ -14,6 +14,8 @@ object CompilerOptions {
 }
 
 object Resources {
-    const val SOURCE_PATH = "../chaterview-private"
-    const val DESTINATION_PATH = "./src/main/resources"
+    const val YML_SOURCE_PATH = "../chaterview-private"
+    const val YML_DESTINATION_PATH = "./src/main/resources"
+    const val SWAGGER_SOURCE_PATH = "../chaterview-private/swagger"
+    const val SWAGGER_DESTINATION_PATH = "./src/main/resources/static"
 }
