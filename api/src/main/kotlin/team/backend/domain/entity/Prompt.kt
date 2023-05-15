@@ -20,7 +20,11 @@ class Prompt(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "prompt_type", nullable = false)
-    val type: PromptType,
+    val promptType: PromptType,
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "position_type", nullable = false)
+    val positionType: PositionType,
 
     @Column(nullable = false)
     val command: String,
@@ -28,4 +32,8 @@ class Prompt(
 
 enum class PromptType {
     INTERVIEW_ANSWER
+}
+
+enum class PositionType {
+    PREFIX, SUFFIX
 }
