@@ -4,6 +4,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 plugins {
 	id(Plugins.SPRING_BOOT) version Versions.SPRING_BOOT
 	id(Plugins.SPRING_DEPENDENCY_MANAGEMENT) version Versions.SPRING_DEPENDENCY_MANAGEMENT
+	id(Plugins.EPAGES) version Versions.EPAGES
 	kotlin(Plugins.JVM) version Versions.KOTLIN
 	kotlin(Plugins.SPRING) version Versions.KOTLIN
 	kotlin(Plugins.JPA) version Versions.KOTLIN
@@ -59,7 +60,9 @@ subprojects {
 		testImplementation(Kotest.RUNNER_JUNIT)
 		testImplementation(Kotest.ASSERTIONS_CORE)
 		testImplementation(Kotest.PROPERTY)
-		testImplementation(Spring.TEST)
+		testImplementation(Spring.TEST)  {
+			exclude(JUNIT)
+		}
 	}
 }
 
@@ -72,11 +75,17 @@ project(Modules.CORE) {
 }
 
 project(Modules.API) {
+
+	apply(plugin = Plugins.EPAGES)
+
 	dependencies {
 		implementation(project(Modules.CORE))
 		implementation(project(Modules.CLIENT))
 
 		testImplementation(ProjectReactor.TEST)
+		testImplementation(Documentation.SPRING_RESTDOCS_WEBCLIENT)
+		testImplementation(Documentation.EPAGES_RESTDOCS_API_SPEC)
+		testImplementation(Documentation.EPAGES_RESTDOCS_API_SPEC_WEBCLIENT)
 
 		val jar: Jar by tasks
 		val bootJar: BootJar by tasks
@@ -85,15 +94,40 @@ project(Modules.API) {
 		jar.enabled = false
 	}
 
+	openapi3 {
+		this.setServer("http://localhost:8080")
+		title = "Chaterview API"
+		description = "Chaterview API Docs"
+		version = "0.1.0"
+		format = "yaml"
+	}
+
+	tasks.bootJar {
+		dependsOn("copyOasToSwagger")
+	}
+
 	tasks.register<Copy>("copySecretYml") {
-		from(Resources.SOURCE_PATH) {
+		from(Resources.YML_SOURCE_PATH) {
 			include("*.yml")
 		}
-		into(Resources.DESTINATION_PATH)
+		into(Resources.YML_DESTINATION_PATH)
+	}
+
+	tasks.register<Copy>("copySecretSwagger") {
+		from(Resources.SWAGGER_SOURCE_PATH) {
+			include("/**")
+		}
+		into(Resources.SWAGGER_DESTINATION_PATH)
 	}
 
 	tasks.named("compileJava") {
-		dependsOn("copySecretYml")
+		dependsOn("copySecretYml", "copySecretSwagger")
+	}
+
+	tasks.register<Copy>("copyOasToSwagger") {
+		from("$buildDir/api-spec/openapi3.yaml")
+		into("$buildDir/resources/main/static/docs")
+		dependsOn("openapi3")
 	}
 }
 

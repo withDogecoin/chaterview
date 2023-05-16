@@ -17,6 +17,9 @@ object Versions {
     // Netty
     const val NETTY_DNS_RESOLVER_MACOS = "4.1.92.Final"
 
+    // Docs
+    const val EPAGES = "0.18.0"
+
     // test
     const val KOTEST = "5.5.5"
 }
