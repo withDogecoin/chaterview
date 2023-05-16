@@ -13,17 +13,6 @@ import team.backend.response.ResponseCode
 @RestControllerAdvice
 class CommonExceptionHandler {
 
-    @ExceptionHandler(Exception::class)
-    fun exception(e: Exception): Mono<ResponseEntity<FailResponse>> {
-        return Mono.just(ResponseEntity(FailResponse.from(), ResponseCode.INTERNAL_SERVER_ERROR.httpStatus))
-    }
-
-    @ExceptionHandler(BaseException::class)
-    fun baseException(e: BaseException): Mono<ResponseEntity<FailResponse>> {
-        val errorCode = e.errorCode
-        return Mono.just(ResponseEntity(FailResponse.from(errorCode), errorCode.httpStatus))
-    }
-
     @ExceptionHandler(WebExchangeBindException::class)
     fun webExchangeBindException(e: WebExchangeBindException): Mono<ResponseEntity<FailResponse>> {
         val errorCode = ResponseCode.BAD_REQUEST
@@ -35,5 +24,16 @@ class CommonExceptionHandler {
             )
         }
         return Mono.just(ResponseEntity(FailResponse.of(errorCode, errors), errorCode.httpStatus))
+    }
+
+    @ExceptionHandler(BaseException::class)
+    fun baseException(e: BaseException): Mono<ResponseEntity<FailResponse>> {
+        val errorCode = e.errorCode
+        return Mono.just(ResponseEntity(FailResponse.from(errorCode), errorCode.httpStatus))
+    }
+
+    @ExceptionHandler(Exception::class)
+    fun exception(e: Exception): Mono<ResponseEntity<FailResponse>> {
+        return Mono.just(ResponseEntity(FailResponse.from(), ResponseCode.INTERNAL_SERVER_ERROR.httpStatus))
     }
 }
