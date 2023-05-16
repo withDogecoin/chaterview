@@ -10,6 +10,7 @@ object Spring {
     const val JPA = "org.springframework.boot:spring-boot-starter-data-jpa"
     const val TEST = "org.springframework.boot:spring-boot-starter-test"
     const val CONFIGURATION_PROCESSOR = "org.springframework.boot:spring-boot-configuration-processor"
+    const val VALIDATION = "org.springframework.boot:spring-boot-starter-validation"
 }
 
 object Netty {
