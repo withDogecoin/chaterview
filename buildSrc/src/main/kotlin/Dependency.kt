@@ -65,4 +65,8 @@ object Documentation {
     const val EPAGES_RESTDOCS_API_SPEC_WEBCLIENT = "com.epages:restdocs-api-spec-webtestclient:${Versions.EPAGES}"
 }
 
+object Logging {
+    const val LOG_STASH_ENCODER = "net.logstash.logback:logstash-logback-encoder:${Versions.LOG_STASH_ENCODER}"
+}
+
 const val JUNIT = "junit"

@@ -18,4 +18,6 @@ object Resources {
     const val YML_DESTINATION_PATH = "./src/main/resources"
     const val SWAGGER_SOURCE_PATH = "../chaterview-private/swagger"
     const val SWAGGER_DESTINATION_PATH = "./src/main/resources/static"
+    const val LOGGING_SOURCE_PATH = "../chaterview-private/logging"
+    const val LOGGING_DESTINATION_PATH = "./src/main/resources/logging"
 }
