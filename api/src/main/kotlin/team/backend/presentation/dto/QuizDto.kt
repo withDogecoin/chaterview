@@ -8,7 +8,7 @@ class QuizDto {
     class AnswerRequest(
         @field:NotNull
         val quizId: Long,
-        @field:NotEmpty(message = "공백은 불가능합니다.")
+        @field:NotEmpty(message = "Blank spaces are not possible.")
         val answer: String,
     )
 
