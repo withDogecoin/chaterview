@@ -17,6 +17,9 @@ object Versions {
     // Netty
     const val NETTY_DNS_RESOLVER_MACOS = "4.1.92.Final"
 
+    // Logging
+    const val LOG_STASH_ENCODER = "7.3"
+
     // Docs
     const val EPAGES = "0.18.0"
 

@@ -56,6 +56,8 @@ subprojects {
 
 		implementation(Netty.DNS_RESOLVER_MACOS)
 
+		implementation(Logging.LOG_STASH_ENCODER)
+
 		addDatabaseDependencies()
 
 		testImplementation(Kotest.RUNNER_JUNIT)
@@ -121,8 +123,15 @@ project(Modules.API) {
 		into(Resources.SWAGGER_DESTINATION_PATH)
 	}
 
+	tasks.register<Copy>("copyLogXml") {
+		from(Resources.LOGGING_SOURCE_PATH) {
+			include("/**")
+		}
+		into(Resources.LOGGING_DESTINATION_PATH)
+	}
+
 	tasks.named("compileJava") {
-		dependsOn("copySecretYml", "copySecretSwagger")
+		dependsOn("copySecretYml", "copySecretSwagger", "copyLogXml")
 	}
 
 	tasks.register<Copy>("copyOasToSwagger") {
