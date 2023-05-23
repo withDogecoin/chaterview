@@ -2,7 +2,7 @@ package team.backend.domain.repository
 
 import team.backend.domain.entity.Quiz
 
-interface QuizRepository {
+interface QuizReader {
 
-    suspend fun findById(id: Long): Quiz
+    suspend fun get(id: Long): Quiz
 }

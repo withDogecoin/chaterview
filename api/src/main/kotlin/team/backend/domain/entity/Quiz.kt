@@ -31,11 +31,11 @@ class Quiz(
     @Column(name = "quiz_level", nullable = false)
     val level: QuizLevel,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_id", nullable = false)
     val job: Job,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id", nullable = false)
     val subject: Subject,
 ): BaseEntity()

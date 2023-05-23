@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
-import reactor.core.publisher.Mono
+import org.springframework.web.reactive.function.client.awaitBody
 import team.backend.dto.ChatDto
 import team.backend.properties.OpenAiProperties
 
@@ -18,13 +18,13 @@ class OpenAiClient(
         .baseUrl(openAiProperties.endpoint.base)
         .build()
 
-    fun chat(body: ChatDto.Request): Mono<ChatDto.Response> {
+    suspend fun chat(body: ChatDto.Request): ChatDto.Response {
         return webClient.post()
             .uri(openAiProperties.endpoint.chat)
             .contentType(MediaType.APPLICATION_JSON)
             .header("Authorization", "Bearer ${openAiProperties.token}")
             .bodyValue(objectMapper.writeValueAsString(body))
             .retrieve()
-            .bodyToMono(ChatDto.Response::class.java)
+            .awaitBody<ChatDto.Response>()
     }
 }

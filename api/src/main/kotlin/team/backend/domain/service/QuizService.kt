@@ -1,28 +1,8 @@
 package team.backend.domain.service
 
-import jakarta.transaction.Transactional
-import org.springframework.stereotype.Service
-import team.backend.domain.entity.Job
-import team.backend.domain.entity.JobType
-import team.backend.domain.repository.JobRepository
-import team.backend.domain.repository.QuizRepository
+import team.backend.domain.dto.command.QuizCommand
 
-@Service
-class QuizService(
-    private val quizRepository: QuizRepository,
-    private val jobRepository: JobRepository
-) {
+interface QuizService {
 
-    suspend fun createJob() {
-        val job = Job(type = JobType.BACKEND_ENGINEER)
-        jobRepository.save(job)
-    }
-
-
-    suspend fun findJob() {
-        val result = jobRepository.findById(1L)
-        result?.let {
-            println(result.type)
-        }
-    }
+    suspend fun answer(command: QuizCommand.AnswerRequest): QuizCommand.AnswerResponse
 }

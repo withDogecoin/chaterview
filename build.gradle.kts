@@ -143,6 +143,7 @@ project(Modules.API) {
 
 project(Modules.CLIENT) {
 	dependencies {
+		implementation(project(Modules.CORE))
 		implementation(Spring.WEBFLUX)
 	}
 
