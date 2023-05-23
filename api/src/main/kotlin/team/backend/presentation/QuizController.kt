@@ -4,9 +4,7 @@ import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import team.backend.domain.dto.QuizCommand
-import team.backend.domain.entity.Job
-import team.backend.domain.entity.Quiz
+import team.backend.domain.dto.command.QuizCommand
 import team.backend.domain.service.QuizService
 import team.backend.presentation.dto.QuizDto
 

@@ -1,4 +1,4 @@
-package team.backend.domain.dto
+package team.backend.domain.dto.command
 
 class QuizCommand {
 

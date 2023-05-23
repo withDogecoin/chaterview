@@ -2,7 +2,7 @@ package team.backend.domain.service
 
 import org.springframework.stereotype.Service
 import team.backend.client.OpenAiClient
-import team.backend.domain.dto.QuizCommand
+import team.backend.domain.dto.command.QuizCommand
 import team.backend.domain.entity.*
 import team.backend.domain.repository.MemberQuizAnswerStore
 import team.backend.domain.repository.MemberReader
