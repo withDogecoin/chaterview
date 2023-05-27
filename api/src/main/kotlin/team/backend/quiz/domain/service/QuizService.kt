@@ -1,6 +1,6 @@
 package team.backend.quiz.domain.service
 
-import team.backend.quiz.domain.dto.command.QuizCommand
+import team.backend.quiz.domain.command.QuizCommand
 
 interface QuizService {
 

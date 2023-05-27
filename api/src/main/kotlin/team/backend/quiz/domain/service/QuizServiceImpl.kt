@@ -2,8 +2,7 @@ package team.backend.quiz.domain.service
 
 import org.springframework.stereotype.Service
 import team.backend.client.OpenAiClient
-import team.backend.quiz.domain.dto.command.QuizCommand
-import team.backend.quiz.entity.*
+import team.backend.quiz.domain.command.QuizCommand
 import team.backend.member.domain.repository.MemberQuizAnswerStore
 import team.backend.member.domain.repository.MemberReader
 import team.backend.prompt.domain.repository.PromptReader
