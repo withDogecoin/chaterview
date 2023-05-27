@@ -57,8 +57,9 @@ class QuizServiceImpl(
     }
 
     private suspend fun generateMessage(quiz: Quiz, answer: String): String {
-        val interviewPrefixPrompt = promptReader.get(PromptType.INTERVIEW_ANSWER, PositionType.PREFIX)
-        val interviewSuffixPrompt = promptReader.get(PromptType.INTERVIEW_ANSWER, PositionType.SUFFIX)
+        val prompts = promptReader.find(PromptType.INTERVIEW_ANSWER)
+        val interviewPrefixPrompt = prompts.first { it.positionType == PositionType.PREFIX }
+        val interviewSuffixPrompt = prompts.first { it.positionType == PositionType.SUFFIX }
         return quiz.question + interviewPrefixPrompt.command + answer + interviewSuffixPrompt.command
     }
 
