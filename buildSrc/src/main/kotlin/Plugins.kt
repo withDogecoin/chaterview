@@ -4,6 +4,9 @@ object Plugins {
     const val JVM = "jvm"
     const val SPRING = "plugin.spring"
     const val JPA = "plugin.jpa"
+    const val KAPT = "kapt"
+    const val KAPT_FULL_NAME = "org.jetbrains.kotlin.kapt"
+
     const val JETBRAINS_KOTLIN_JVM = "org.jetbrains.kotlin.jvm"
     const val JETBRAINS_KOTLIN_SPRING = "org.jetbrains.kotlin.plugin.spring"
     const val JETBRAINS_KOTLIN_JPA = "org.jetbrains.kotlin.plugin.jpa"

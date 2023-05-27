@@ -32,6 +32,11 @@ object Hibernate {
     const val REACTIVE_CORE_JAKARTA = "org.hibernate.reactive:hibernate-reactive-core-jakarta:${Versions.HIBERNATE_REACTIVE_CORE_JAKARTA}"
 }
 
+object Mapper {
+    const val MAPSTRUCT = "org.mapstruct:mapstruct:${Versions.MAPSTRUCT}"
+    const val MAPSTRUCT_PROCESSOR = "org.mapstruct:mapstruct-processor:${Versions.MAPSTRUCT}"
+}
+
 object Line {
     /*
         LINE Lib versions - https://github.com/line/kotlin-jdsl/blob/main/libs.versions.toml
