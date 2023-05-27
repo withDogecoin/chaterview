@@ -5,7 +5,6 @@ import jakarta.annotation.PostConstruct
 import org.hibernate.reactive.mutiny.impl.MutinySessionFactoryImpl
 import org.springframework.stereotype.Repository
 import team.backend.quiz.domain.entity.*
-import team.backend.quiz.entity.*
 import team.backend.quiz.domain.repository.QuizStore
 
 @Repository

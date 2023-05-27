@@ -47,7 +47,7 @@ class QuizServiceImpl(
             feedback = feedback,
             quiz = quiz,
             member = memberReader.get(1L)
-        )
+            )
         )
 
         return QuizCommand.AnswerResponse(

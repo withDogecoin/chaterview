@@ -4,7 +4,6 @@ import com.linecorp.kotlinjdsl.spring.data.reactive.query.SpringDataHibernateMut
 import jakarta.annotation.PostConstruct
 import org.hibernate.reactive.mutiny.impl.MutinySessionFactoryImpl
 import org.springframework.stereotype.Repository
-import team.backend.quiz.entity.*
 import team.backend.member.domain.repository.MemberStore
 import team.backend.member.domain.entity.Member
 import team.backend.quiz.domain.entity.Job
