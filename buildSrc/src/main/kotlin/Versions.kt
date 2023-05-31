@@ -3,6 +3,7 @@ object Versions {
     const val SPRING_BOOT = "3.0.5"
     const val SPRING_DEPENDENCY_MANAGEMENT = "1.1.0"
     const val KOTLIN = "1.7.22"
+    const val KAPT = "1.9.0-Beta"
 
     // JVM
     const val JVM = "17"
@@ -25,4 +26,7 @@ object Versions {
 
     // test
     const val KOTEST = "5.5.5"
+
+    // mapper
+    const val MAPSTRUCT = "1.5.5.Final"
 }

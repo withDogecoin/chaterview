@@ -8,6 +8,7 @@ plugins {
 	kotlin(Plugins.JVM) version Versions.KOTLIN
 	kotlin(Plugins.SPRING) version Versions.KOTLIN
 	kotlin(Plugins.JPA) version Versions.KOTLIN
+	kotlin(Plugins.KAPT) version Versions.KAPT
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -38,6 +39,7 @@ subprojects {
 	apply(plugin = Plugins.JETBRAINS_KOTLIN_JVM)
 	apply(plugin = Plugins.JETBRAINS_KOTLIN_SPRING)
 	apply(plugin = Plugins.JETBRAINS_KOTLIN_JPA)
+	apply(plugin = Plugins.KAPT_FULL_NAME)
 
 	allOpen {
 		annotation(Annotations.ENTITY)
@@ -57,6 +59,9 @@ subprojects {
 		implementation(Netty.DNS_RESOLVER_MACOS)
 
 		implementation(Logging.LOG_STASH_ENCODER)
+
+		implementation(Mapper.MAPSTRUCT)
+		kapt(Mapper.MAPSTRUCT_PROCESSOR)
 
 		addDatabaseDependencies()
 
