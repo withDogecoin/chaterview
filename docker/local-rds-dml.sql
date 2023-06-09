@@ -77,3 +77,21 @@ VALUES ('Question 18', 'EASY', 1, 1, 2,  'SYSTEM', 'SYSTEM');
 
 INSERT INTO chaterview.tbl_quiz (question, quiz_level, active, job_id, subject_id, created_by, last_modified_by)
 VALUES ('Question 19', 'EASY', 1, 1, 2,  'SYSTEM', 'SYSTEM');
+
+INSERT INTO chaterview.tbl_quiz (question, quiz_level, active, job_id, subject_id, created_by, last_modified_by)
+VALUES ('Question 20', 'EASY', 1, 1, 2,  'SYSTEM', 'SYSTEM');
+
+INSERT INTO chaterview.tbl_quiz (question, quiz_level, active, job_id, subject_id, created_by, last_modified_by)
+VALUES ('Question 21', 'EASY', 1, 1, 2,  'SYSTEM', 'SYSTEM');
+
+INSERT INTO chaterview.tbl_quiz (question, quiz_level, active, job_id, subject_id, created_by, last_modified_by)
+VALUES ('Question 22', 'EASY', 1, 1, 2,  'SYSTEM', 'SYSTEM');
+
+INSERT INTO chaterview.tbl_quiz (question, quiz_level, active, job_id, subject_id, created_by, last_modified_by)
+VALUES ('Question 23', 'EASY', 1, 1, 2,  'SYSTEM', 'SYSTEM');
+
+INSERT INTO chaterview.tbl_quiz (question, quiz_level, active, job_id, subject_id, created_by, last_modified_by)
+VALUES ('Question 24', 'EASY', 1, 1, 2,  'SYSTEM', 'SYSTEM');
+
+INSERT INTO chaterview.tbl_quiz (question, quiz_level, active, job_id, subject_id, created_by, last_modified_by)
+VALUES ('Question 25', 'EASY', 1, 1, 2,  'SYSTEM', 'SYSTEM');

@@ -2,6 +2,7 @@ package team.backend.infrastructure.quiz.repository
 
 import com.linecorp.kotlinjdsl.querydsl.expression.col
 import com.linecorp.kotlinjdsl.spring.data.reactive.query.SpringDataHibernateMutinyReactiveQueryFactory
+import com.linecorp.kotlinjdsl.spring.data.reactive.query.listQuery
 import com.linecorp.kotlinjdsl.spring.data.reactive.query.singleQuery
 import org.springframework.stereotype.Repository
 import team.backend.domain.job.entity.Job
@@ -23,20 +24,39 @@ class QuizReaderImpl(
     }
 
     override suspend fun getIds(): List<Long> {
-        return queryFactory.singleQuery {
+        return queryFactory.listQuery {
             selectMulti(col(Quiz::id))
             from(entity(Quiz::class))
         }
     }
 
-    override suspend fun getRandomly(job: Job, tier: Tier, ids: List<Long>): List<Quiz> {
-        return queryFactory.singleQuery {
-            selectMulti(entity(Quiz::class))
+    override suspend fun getQuizIdsThatCanBeSolvedByMember(job: Job, tier: Tier): List<Long> {
+        return queryFactory.listQuery {
+            selectMulti(col(Quiz::id))
             from(entity(Quiz::class))
+            join(
+                Quiz::class,
+                Job::class,
+                on(Quiz::job),
+            )
+            whereAnd(
+                col(Quiz::level).`in`(tier.matchedQuizLevels()),
+                col(Quiz::job).equal(job),
+                col(Quiz::active).equal(true),
+            )
+        }
+    }
+
+    override suspend fun getQuizByIds(ids: List<Long>): List<Quiz> {
+        return queryFactory.listQuery {
+            select(entity(Quiz::class))
+            from(entity(Quiz::class))
+            join(
+                Quiz::class,
+                Job::class,
+                on(Quiz::job),
+            )
             where(col(Quiz::id).`in`(ids))
-            and(col(Job::id).equal(job.id))
-            and(col(Quiz::active).equal(true))
-            and(col(Quiz::level).`in`(tier.matchedQuizLevels()))
         }
     }
 }

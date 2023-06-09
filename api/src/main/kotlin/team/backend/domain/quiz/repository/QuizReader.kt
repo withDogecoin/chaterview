@@ -10,5 +10,7 @@ interface QuizReader {
 
     suspend fun getIds(): List<Long>
 
-    suspend fun getRandomly(job: Job, tier: Tier, ids: List<Long>): List<Quiz>
+    suspend fun getQuizIdsThatCanBeSolvedByMember(job: Job, tier: Tier): List<Long>
+
+    suspend fun getQuizByIds(ids: List<Long>): List<Quiz>
 }

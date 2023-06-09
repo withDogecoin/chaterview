@@ -2,6 +2,7 @@ package team.backend.domain.quiz.service
 
 import org.springframework.stereotype.Service
 import team.backend.client.OpenAiClient
+import team.backend.domain.member.entity.Member
 import team.backend.domain.quiz.command.QuizCommand
 import team.backend.domain.member.repository.MemberQuizAnswerStore
 import team.backend.domain.member.repository.MemberReader
@@ -29,7 +30,8 @@ class QuizServiceImpl(
 ): QuizService {
     override suspend fun random(authorization: String): QuizQuery.RandomResponse {
         val member = memberReader.get(authorization.toLong())
-        val quizzes = quizReader.getRandomly(member.job, member.tier, getRandomIds())
+
+        val quizzes = quizReader.getQuizByIds(getRandomlyQuizIds(member))
             .asSequence()
             .map { QuizQuery.Base(it.question, it.level.name, it.getJobName(), it.getSubjectName()) }
             .toList()
@@ -37,18 +39,19 @@ class QuizServiceImpl(
         return QuizQuery.RandomResponse(quizzes)
     }
 
-    // TODO Caching
-    private suspend fun getRandomIds(): List<Long> {
-        val quizIds = quizReader.getIds()
-        val randomIds = mutableListOf<Long>()
+    private suspend fun getRandomlyQuizIds(member: Member): List<Long> {
+        val quizIds = getCachedQuizIdsThatCanBeSolvedByMember(member)
 
-        for (i in 1..RANDOM_COUNT) {
-            val randomIndex = Random.nextInt(quizIds.size)
-            val randomId = quizIds[randomIndex]
-            randomIds.add(randomId)
+        if (quizIds.size <= RANDOM_COUNT) {
+            return quizIds
         }
 
-        return randomIds.toList()
+        return quizIds.shuffled().take(RANDOM_COUNT)
+    }
+
+    // TODO Caching
+    private suspend fun getCachedQuizIdsThatCanBeSolvedByMember(member: Member): List<Long> {
+        return quizReader.getQuizIdsThatCanBeSolvedByMember(member.job, member.tier)
     }
 
     override suspend fun answer(command: QuizCommand.AnswerRequest): QuizCommand.AnswerResponse {

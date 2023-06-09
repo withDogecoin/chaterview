@@ -20,7 +20,7 @@ class Member(
     @Column(name = "tier", nullable = false)
     val tier: Tier = Tier.BEGINNER,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "job_id", nullable = false)
     val job: Job,
 ): BaseEntity()
