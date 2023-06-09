@@ -15,17 +15,41 @@ import team.backend.model.ChatRole
 import team.backend.domain.prompt.entity.PositionType
 import team.backend.domain.prompt.entity.PromptType
 import team.backend.domain.quiz.entity.Quiz
+import team.backend.domain.quiz.policy.RANDOM_COUNT
+import team.backend.domain.quiz.query.QuizQuery
+import kotlin.random.Random
 
 @Service
 class QuizServiceImpl(
     private val quizReader: QuizReader,
     private val promptReader: PromptReader,
     private val memberReader: MemberReader,
-
     private val memberQuizAnswerStore: MemberQuizAnswerStore,
-
     private val openAiClient: OpenAiClient
 ): QuizService {
+    override suspend fun random(authorization: String): QuizQuery.RandomResponse {
+        val member = memberReader.get(authorization.toLong())
+        val quizzes = quizReader.getRandomly(member.job, member.tier, getRandomIds())
+            .asSequence()
+            .map { QuizQuery.Base(it.question, it.level.name, it.getJobName(), it.getSubjectName()) }
+            .toList()
+
+        return QuizQuery.RandomResponse(quizzes)
+    }
+
+    // TODO Caching
+    private suspend fun getRandomIds(): List<Long> {
+        val quizIds = quizReader.getIds()
+        val randomIds = mutableListOf<Long>()
+
+        for (i in 1..RANDOM_COUNT) {
+            val randomIndex = Random.nextInt(quizIds.size)
+            val randomId = quizIds[randomIndex]
+            randomIds.add(randomId)
+        }
+
+        return randomIds.toList()
+    }
 
     override suspend fun answer(command: QuizCommand.AnswerRequest): QuizCommand.AnswerResponse {
         val quiz = quizReader.get(command.quizId)
