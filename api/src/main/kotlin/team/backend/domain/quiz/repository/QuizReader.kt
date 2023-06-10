@@ -8,9 +8,7 @@ interface QuizReader {
 
     suspend fun get(id: Long): Quiz
 
-    suspend fun getIds(): List<Long>
-
-    suspend fun getQuizIdsThatCanBeSolvedByMember(job: Job, tier: Tier): List<Long>
+    suspend fun getQuizIds(job: Job, tier: Tier): List<Long>
 
     suspend fun getQuizByIds(ids: List<Long>): List<Quiz>
 }

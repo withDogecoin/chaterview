@@ -4,5 +4,5 @@ import team.backend.domain.member.entity.Member
 
 interface MemberReader {
 
-    suspend fun get(id: Long): Member
+    suspend fun find(id: Long): Member?
 }

@@ -18,7 +18,7 @@ import team.backend.domain.prompt.entity.PromptType
 import team.backend.domain.quiz.entity.Quiz
 import team.backend.domain.quiz.policy.RANDOM_COUNT
 import team.backend.domain.quiz.query.QuizQuery
-import kotlin.random.Random
+import team.backend.exception.NotFoundMemberException
 
 @Service
 class QuizServiceImpl(
@@ -29,7 +29,7 @@ class QuizServiceImpl(
     private val openAiClient: OpenAiClient
 ): QuizService {
     override suspend fun random(authorization: String): QuizQuery.RandomResponse {
-        val member = memberReader.get(authorization.toLong())
+        val member = memberReader.find(authorization.toLong()) ?: throw NotFoundMemberException()
 
         val quizzes = quizReader.getQuizByIds(getRandomlyQuizIds(member))
             .asSequence()
@@ -40,7 +40,7 @@ class QuizServiceImpl(
     }
 
     private suspend fun getRandomlyQuizIds(member: Member): List<Long> {
-        val quizIds = getCachedQuizIdsThatCanBeSolvedByMember(member)
+        val quizIds = getQuizIdsThatCanBeSolvedByMember(member)
 
         if (quizIds.size <= RANDOM_COUNT) {
             return quizIds
@@ -49,9 +49,8 @@ class QuizServiceImpl(
         return quizIds.shuffled().take(RANDOM_COUNT)
     }
 
-    // TODO Caching
-    private suspend fun getCachedQuizIdsThatCanBeSolvedByMember(member: Member): List<Long> {
-        return quizReader.getQuizIdsThatCanBeSolvedByMember(member.job, member.tier)
+    private suspend fun getQuizIdsThatCanBeSolvedByMember(member: Member): List<Long> {
+        return quizReader.getQuizIds(member.job, member.tier)
     }
 
     override suspend fun answer(command: QuizCommand.AnswerRequest): QuizCommand.AnswerResponse {
@@ -73,7 +72,7 @@ class QuizServiceImpl(
             answer = command.answer,
             feedback = feedback,
             quiz = quiz,
-            member = memberReader.get(1L)
+            member = memberReader.find(1L) ?: throw NotFoundMemberException()
             )
         )
 

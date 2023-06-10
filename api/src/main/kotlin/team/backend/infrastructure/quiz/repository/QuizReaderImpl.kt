@@ -23,15 +23,8 @@ class QuizReaderImpl(
         }
     }
 
-    override suspend fun getIds(): List<Long> {
-        return queryFactory.listQuery {
-            selectMulti(col(Quiz::id))
-            from(entity(Quiz::class))
-        }
-    }
-
-    override suspend fun getQuizIdsThatCanBeSolvedByMember(job: Job, tier: Tier): List<Long> {
-        return queryFactory.listQuery {
+    override suspend fun getQuizIds(job: Job, tier: Tier): List<Long> {
+        return queryFactory.listQuery<Long> {
             selectMulti(col(Quiz::id))
             from(entity(Quiz::class))
             join(
