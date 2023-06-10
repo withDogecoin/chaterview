@@ -23,7 +23,7 @@ class QuizReaderImpl(
         }
     }
 
-    override suspend fun getQuizIds(job: Job, tier: Tier): List<Long> {
+    override suspend fun findQuizIds(job: Job, tier: Tier): List<Long> {
         return queryFactory.listQuery<Long> {
             selectMulti(col(Quiz::id))
             from(entity(Quiz::class))
@@ -40,7 +40,7 @@ class QuizReaderImpl(
         }
     }
 
-    override suspend fun getQuizByIds(ids: List<Long>): List<Quiz> {
+    override suspend fun findQuizByIds(ids: List<Long>): List<Quiz> {
         return queryFactory.listQuery {
             select(entity(Quiz::class))
             from(entity(Quiz::class))

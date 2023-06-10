@@ -31,7 +31,7 @@ class QuizServiceImpl(
     override suspend fun random(authorization: String): QuizQuery.RandomResponse {
         val member = memberReader.find(authorization.toLong()) ?: throw NotFoundMemberException()
 
-        val quizzes = quizReader.getQuizByIds(getRandomlyQuizIds(member))
+        val quizzes = quizReader.findQuizByIds(getRandomlyQuizIds(member))
             .asSequence()
             .map { QuizQuery.Base(it.question, it.level.name, it.getJobName(), it.getSubjectName()) }
             .toList()
@@ -40,7 +40,7 @@ class QuizServiceImpl(
     }
 
     private suspend fun getRandomlyQuizIds(member: Member): List<Long> {
-        val quizIds = getQuizIdsThatCanBeSolvedByMember(member)
+        val quizIds = findQuizIdsThatCanBeSolvedByMember(member)
 
         if (quizIds.size <= RANDOM_COUNT) {
             return quizIds
@@ -49,8 +49,8 @@ class QuizServiceImpl(
         return quizIds.shuffled().take(RANDOM_COUNT)
     }
 
-    private suspend fun getQuizIdsThatCanBeSolvedByMember(member: Member): List<Long> {
-        return quizReader.getQuizIds(member.job, member.tier)
+    private suspend fun findQuizIdsThatCanBeSolvedByMember(member: Member): List<Long> {
+        return quizReader.findQuizIds(member.job, member.tier)
     }
 
     override suspend fun answer(command: QuizCommand.AnswerRequest): QuizCommand.AnswerResponse {
