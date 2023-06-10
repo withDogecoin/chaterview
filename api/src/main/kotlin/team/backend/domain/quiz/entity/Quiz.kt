@@ -40,8 +40,12 @@ class Quiz(
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "subject_id", nullable = false)
     val subject: Subject,
-): BaseEntity()
+): BaseEntity() {
+    fun getJobName() = job.type.name
+
+    fun getSubjectName() = subject.type.name
+}
 
 enum class QuizLevel {
-    BEGINNER, INTERMEDIATE, ADVANCED, EXPERT
+    EASY, INTERMEDIATE, ADVANCED, EXPERT
 }

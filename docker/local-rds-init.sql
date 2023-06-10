@@ -37,8 +37,9 @@ CREATE TABLE IF NOT EXISTS chaterview.tbl_subject(
 );
 
 CREATE TABLE IF NOT EXISTS chaterview.tbl_member(
-    member_id    INT(11)  unsigned auto_increment COMMENT '일련번호',
-    member_name        VARCHAR(255) NOT NULL COMMENT '이름',
+    member_id   INT(11)  unsigned auto_increment COMMENT '일련번호',
+    member_name VARCHAR(255) NOT NULL COMMENT '이름',
+    tier        VARCHAR(25) NOT NULL COMMENT '티어',
     job_id      INT(11) NOT NULL COMMENT '직업 일련변호',
     created_at  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '등록일시',
     created_by  VARCHAR(100) NOT NULL DEFAULT 'SYSTEM' COMMENT '등록자',

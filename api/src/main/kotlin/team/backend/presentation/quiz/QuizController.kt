@@ -15,16 +15,15 @@ import team.backend.response.SuccessResponse
 @RestController
 class QuizController(
     private val quizService: QuizService,
-
     private val quizMapper: QuizMapper,
 ) {
 
     @GetMapping("/v1/quiz/random")
-    suspend fun randomQuizzes(): String {
-        val result = RequestContext.getValue(Headers.AUTHORIZATION)
-        println("111Result: $result")
+    suspend fun random(): SuccessResponse<QuizDto.RandomResponse> {
+        val authorization = RequestContext.getValue(Headers.AUTHORIZATION)
+        val response = quizService.random(authorization)
 
-        return result
+        return SuccessResponse.from(QuizDto.RandomResponse(quizzes = response.quizzes))
     }
 
     @PostMapping("/v1/quiz/answer")

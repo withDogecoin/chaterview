@@ -40,7 +40,7 @@ class QuizStoreImpl(
         val quiz = Quiz(
             question = "Is Java a language that runs on top of the JVM?",
             active = true,
-            level = QuizLevel.BEGINNER,
+            level = QuizLevel.EASY,
             job = savedJob.get(),
             subject = savedSubject.get(),
         )
