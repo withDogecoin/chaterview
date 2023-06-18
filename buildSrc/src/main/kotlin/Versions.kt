@@ -29,4 +29,8 @@ object Versions {
 
     // mapper
     const val MAPSTRUCT = "1.5.5.Final"
+
+    // springmockk
+    const val SPRINGMOCKK = "4.0.2"
+
 }

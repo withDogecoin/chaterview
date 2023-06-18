@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import team.backend.common.constants.QUIZ_ANSWER
+import team.backend.common.constants.RAMDOM_QUIZ
 import team.backend.constants.Headers
 import team.backend.context.RequestContext
 import team.backend.domain.quiz.mapper.QuizMapper
@@ -18,7 +20,7 @@ class QuizController(
     private val quizMapper: QuizMapper,
 ) {
 
-    @GetMapping("/v1/quiz/random")
+    @GetMapping(RAMDOM_QUIZ)
     suspend fun random(): SuccessResponse<QuizDto.RandomResponse> {
         val authorization = RequestContext.getValue(Headers.AUTHORIZATION)
         val response = quizService.random(authorization)
@@ -26,7 +28,7 @@ class QuizController(
         return SuccessResponse.from(QuizDto.RandomResponse(quizzes = response.quizzes))
     }
 
-    @PostMapping("/v1/quiz/answer")
+    @PostMapping(QUIZ_ANSWER)
     suspend fun answer(@Valid @RequestBody request: QuizDto.AnswerRequest): SuccessResponse<QuizDto.AnswerResponse> {
         val answer = quizService.answer(quizMapper.from(request))
 
