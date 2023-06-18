@@ -74,4 +74,7 @@ object Logging {
     const val LOG_STASH_ENCODER = "net.logstash.logback:logstash-logback-encoder:${Versions.LOG_STASH_ENCODER}"
 }
 
+const val SPRINGMOCKK = "com.ninja-squad:springmockk:${Versions.SPRINGMOCKK}"
+
 const val JUNIT = "junit"
+const val MOCKITO_CORE = "mockito-core"

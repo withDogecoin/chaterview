@@ -68,8 +68,10 @@ subprojects {
 		testImplementation(Kotest.RUNNER_JUNIT)
 		testImplementation(Kotest.ASSERTIONS_CORE)
 		testImplementation(Kotest.PROPERTY)
+		testImplementation(SPRINGMOCKK)
 		testImplementation(Spring.TEST)  {
 			exclude(JUNIT)
+			exclude(module = MOCKITO_CORE)
 		}
 	}
 }
