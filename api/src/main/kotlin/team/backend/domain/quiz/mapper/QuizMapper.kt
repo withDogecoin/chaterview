@@ -15,7 +15,8 @@ import team.backend.presentation.quiz.dto.QuizDto
 interface QuizMapper {
 
     fun from(
-        request: QuizDto.AnswerRequest
+        request: QuizDto.AnswerRequest,
+        authorization: String,
     ): QuizCommand.AnswerRequest
 
     @Mapping(source = "correct", target = "isCorrect")
