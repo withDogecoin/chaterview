@@ -19,6 +19,6 @@ class QuizDto {
 
     data class AnswerResponse(
         val isCorrect: Boolean,
-        val answer: String,
+        val answer: String?,
     )
 }
