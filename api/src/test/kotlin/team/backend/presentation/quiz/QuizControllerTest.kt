@@ -71,7 +71,7 @@ class QuizControllerTest: AbstractControllerTest() {
             .bodyValue(request)
             .exchange()
             .expectStatus().isOk()
-            .expectBody(QuizDto.AnswerResponse::class.java)
+            .expectBody()
             .consumeWith(
                 WebTestClientRestDocumentationWrapper.document(
                     "quiz-answer",
