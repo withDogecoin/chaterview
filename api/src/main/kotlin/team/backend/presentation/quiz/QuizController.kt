@@ -30,7 +30,8 @@ class QuizController(
 
     @PostMapping(QUIZ_ANSWER)
     suspend fun answer(@Valid @RequestBody request: QuizDto.AnswerRequest): SuccessResponse<QuizDto.AnswerResponse> {
-        val answer = quizService.answer(quizMapper.from(request))
+        val authorization = RequestContext.getValue(Headers.AUTHORIZATION)
+        val answer = quizService.answer(quizMapper.from(request, authorization))
 
         return SuccessResponse.from(quizMapper.from(answer))
     }

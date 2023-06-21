@@ -72,7 +72,7 @@ class QuizServiceImpl(
             answer = command.answer,
             feedback = feedback,
             quiz = quiz,
-            member = memberReader.find(1L) ?: throw NotFoundMemberException()
+            member = memberReader.find(command.authorization.toLong()) ?: throw NotFoundMemberException()
             )
         )
 

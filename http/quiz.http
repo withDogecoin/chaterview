@@ -1,0 +1,15 @@
+### Random Quiz
+
+GET http://localhost:8080/v1/quiz/random
+Authorization: 1
+
+### Answer Quiz
+
+POST http://localhost:8080/v1/quiz/answer
+Content-Type: application/json
+Authorization: 1
+
+{
+  "quizId": 1,
+  "answer": "yes"
+}
